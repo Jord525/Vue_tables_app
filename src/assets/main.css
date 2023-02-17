@@ -1,0 +1,73 @@
+/* @import './base.css';
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+} */
+.v-popup {
+  border-radius: 15px;
+
+  width: 500px;
+  box-shadow: 0, 0, 17px, 0;
+  background-color: rgb(224, 224, 224);
+}
+
+.inputTable {
+  width: 200px;
+  margin: auto;
+}
+
+.popup_wrapper {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: grey;
+}
+
+.form-select {
+  width: 300px;
+  margin: 5px;
+}
+
+.pagination {
+  margin: 8px;
+}
+
+.page-item {
+  cursor: pointer;
+}
