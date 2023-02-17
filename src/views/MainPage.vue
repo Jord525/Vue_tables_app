@@ -7,6 +7,7 @@
       :sel="sel"
       @input="sel = $event.target.value"
     />
+    {{ count }}
     <Tables
       :updateTable="updateTable"
       :deleteTable="deleteTable"
@@ -42,7 +43,7 @@
     :container-class="'pagination'"
   />
 </template>
-<script>
+<script  >
 import Paginate from "vuejs-paginate-next";
 import axios from "axios";
 import Header from "../components/Header.vue";
@@ -51,6 +52,8 @@ import AddTable from "../components/AddTable.vue";
 import UpdateTable from "../components/UpdateTable.vue";
 import Select from "../components/Select.vue";
 import Tables from "../components/TableComponents/Tables.vue";
+import { useCounterStore } from "../stores/counter.js";
+import { mapState } from "pinia";
 export default {
   components: {
     Header,
@@ -145,6 +148,9 @@ export default {
     },
   },
 
+  computed: {
+    ...mapState(useCounterStore, ["count"]),
+  },
   mounted() {
     this.getAll();
   },
