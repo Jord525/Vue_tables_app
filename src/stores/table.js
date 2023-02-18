@@ -29,7 +29,7 @@ export const useTableStore = defineStore("Table", {
   actions: {
     async getAll() {
       const response = await axios.get(
-        `http://localhost:3333/tables?limit=10&page=${this.page}`
+        `https://server-table-app.onrender.com/tables?limit=10&page=${this.page}`
       );
       this.tables = response.data;
     },
@@ -75,7 +75,7 @@ export const useTableStore = defineStore("Table", {
         (des) => des._id !== id._id,
         console.log(id),
         axios
-          .patch(`http://localhost:3333/table/${id._id}`, {
+          .patch(`https://server-table-app.onrender.com/table/${id._id}`, {
             productName: id.productName,
             quantity: id.quantity,
             weight: id.weight,

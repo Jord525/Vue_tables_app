@@ -93,6 +93,9 @@ export default {
 };
 </script>
 <style scoped>
+.popup__header {
+  margin: 7px;
+}
 .popup__contet {
   display: flex;
 }
