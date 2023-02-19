@@ -66,8 +66,11 @@
             />
           </div>
         </div>
+        <div class="success inputTable" v-if="successMessage != ''">
+          <p class="success__p">{{ successMessage }}</p>
+        </div>
         <div class="popup_footer">
-          <button @click="saveTable" class="btn btn-success">Submit</button>
+          <button @click="saveTable" class="btn btn-success">Сохранить</button>
         </div>
       </div>
     </div>
@@ -76,6 +79,11 @@
 <script>
 import TableDataService from "../service/apiCals.js";
 export default {
+  data() {
+    return {
+      successMessage: "",
+    };
+  },
   props: ["table", "getAll"],
   methods: {
     closePopUp() {
@@ -96,6 +104,12 @@ export default {
         this.table.purchasePrice = response.data.purchasePrice;
         this.table.sellingPrice = response.data.sellingPrice;
         this.getAll();
+        this.table.productName = "";
+        this.table.quantity = "";
+        this.table.weight = "";
+        this.table.purchasePrice = "";
+        this.table.sellingPrice = "";
+        this.successMessage = "Товар успешно добавлен!";
       });
     },
   },
@@ -112,8 +126,7 @@ export default {
   left: 0;
   top: 0;
   bottom: 0;
-  background: black;
-  opacity: 0.9;
+  background: rgb(145, 145, 145);
 }
 .v-popup {
   opacity: 1 !important;
@@ -124,5 +137,14 @@ export default {
 .inputTable {
   width: 200px;
   margin: auto;
+}
+.success__p {
+  color: #67a10f;
+}
+.popup__header {
+  margin: 7px;
+}
+.btn {
+  margin: 5px;
 }
 </style>
