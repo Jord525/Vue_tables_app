@@ -1,6 +1,5 @@
 <template>
   <Header />
-  Проверка комита
   <div>
     <Select
       :selected="selected"
