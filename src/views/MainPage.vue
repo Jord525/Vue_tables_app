@@ -24,7 +24,6 @@
       />
     </div>
   </div>
-  111111111111
   <add-table
     @closePopup="isVisible = false"
     v-if="isVisible"
