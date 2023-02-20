@@ -23,6 +23,7 @@ export const useTableStore = defineStore("Table", {
         purchasePrice: "",
         sellingPrice: "",
       },
+      successMessage: "",
     }
   },
   getters: {},
@@ -32,6 +33,29 @@ export const useTableStore = defineStore("Table", {
         `https://server-table-app.onrender.com/tables?limit=10&page=${this.page}`
       );
       this.tables = response.data;
+    },
+    saveTable() {
+      let data = {
+        productName: this.table.productName,
+        quantity: this.table.quantity,
+        weight: this.table.weight,
+        purchasePrice: this.table.purchasePrice,
+        sellingPrice: this.table.sellingPrice,
+      };
+      TableDataService.create(data).then((response) => {
+        this.table.productName = response.data.productName;
+        this.table.quantity = response.data.quantity;
+        this.table.weight = response.data.weight;
+        this.table.purchasePrice = response.data.purchasePrice;
+        this.table.sellingPrice = response.data.sellingPrice;
+        this.getAll();
+        this.table.productName = "";
+        this.table.quantity = "";
+        this.table.weight = "";
+        this.table.purchasePrice = "";
+        this.table.sellingPrice = "";
+        this.successMessage = "Товар успешно добавлен!";
+      });
     },
     PaginateHandler: function (pageNum) {
       this.page = pageNum;

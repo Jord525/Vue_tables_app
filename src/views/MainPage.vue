@@ -1,37 +1,18 @@
 <template>
   <Header />
-  <div>
-    <Select
-      :selected="selected"
-      :sortSelect="sortSelect"
-      :sel="sel"
-      @input="sel = $event.target.value"
-    />
-    <Tables
-      :updateTable="updateTable"
-      :deleteTable="deleteTable"
+  <Select @input="sel = $event.target.value" />
+  <Tables />
+  <div class="wrapperUpdateTable" v-if="isVisibleTableUpdate">
+    <UpdateTable
+      v-for="table in tables.posts"
+      :key="table._id"
       :tables="tables"
+      @closePopUpUpdate="isVisibleTableUpdate = false"
+      :table="table"
+      :updateTable="updateTable"
     />
-    <div class="wrapperUpdateTable" v-if="isVisibleTableUpdate">
-      <UpdateTable
-        v-for="table in tables.posts"
-        :key="table._id"
-        :tables="tables"
-        @closePopUpUpdate="isVisibleTableUpdate = false"
-        :table="table"
-        :updateTable="updateTable"
-        :page-class="'page-item'"
-      />
-    </div>
   </div>
-  111111111111
-  <add-table
-    @closePopup="isVisible = false"
-    v-if="isVisible"
-    :table="table"
-    :getAll="getAll"
-  >
-  </add-table>
+  <AddTable @closePopup="isVisible = false" v-if="isVisible" />
   <button @click="isVisible = true" class="btn btn-outline-primary">
     Добавить
   </button>
@@ -62,22 +43,12 @@ export default {
     Paginate,
   },
   methods: {
-    ...mapActions(useTableStore, [
-      "getAll",
-      "sortSelect",
-      "deleteTable",
-      "updateTable",
-      "PaginateHandler",
-    ]),
+    ...mapActions(useTableStore, ["getAll", "updateTable", "PaginateHandler"]),
   },
 
   computed: {
-    ...mapState(useTableStore, ["tables", "selected", "table"]),
-    ...mapWritableState(useTableStore, [
-      "isVisibleTableUpdate",
-      "isVisible",
-      "sel",
-    ]),
+    ...mapState(useTableStore, ["tables", "table"]),
+    ...mapWritableState(useTableStore, ["isVisibleTableUpdate", "isVisible"]),
   },
   mounted() {
     this.getAll();

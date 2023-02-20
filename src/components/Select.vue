@@ -7,7 +7,15 @@
   </select>
 </template>
 <script>
+import { mapActions, mapState, mapWritableState } from "pinia";
+import { useTableStore } from "../stores/table";
 export default {
-  props: ["selected", "sortSelect", "sel"],
+  methods: {
+    ...mapActions(useTableStore, ["sortSelect"]),
+  },
+  computed: {
+    ...mapState(useTableStore, ["selected"]),
+    ...mapWritableState(useTableStore, ["sel"]),
+  },
 };
 </script>

@@ -83,7 +83,6 @@ export default {
     };
   },
   props: ["table", "tables", "updateTable"],
-  methods: {},
 
   methods: {
     closePopUpUpdate() {

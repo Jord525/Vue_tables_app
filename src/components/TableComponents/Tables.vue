@@ -29,11 +29,18 @@
   </table>
 </template>
 <script>
+import { mapActions, mapState } from "pinia";
 import Tr from "./Tr.vue";
+import { useTableStore } from "../../stores/table";
 export default {
   components: {
     Tr,
   },
-  props: ["tables", "deleteTable", "updateTable"],
+  methods: {
+    ...mapActions(useTableStore, ["updateTable", "deleteTable"]),
+  },
+  computed: {
+    ...mapState(useTableStore, ["tables"]),
+  },
 };
 </script>
