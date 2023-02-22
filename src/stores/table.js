@@ -5,6 +5,7 @@ import TableDataService from "../service/apiCals.js";
 export const useTableStore = defineStore("Table", {
   state: () => {
     return {
+      sortBy: '',
       tables: [],
       page: 1,
       sel: "",
@@ -30,7 +31,7 @@ export const useTableStore = defineStore("Table", {
   actions: {
     async getAll() {
       const response = await axios.get(
-        `https://server-table-app.onrender.com/tables?limit=10&page=${this.page}`
+        `https://server-table-app.onrender.com/tables?${this.sortBy}limit=10&page=${this.page}`
       );
       this.tables = response.data;
     },
@@ -63,26 +64,21 @@ export const useTableStore = defineStore("Table", {
     },
     sortSelect() {
       if (this.sel === "по умолчанию") {
-        return;
+        return {
+          value: this.sortBy = '',
+          url: this.getAll()
+        };
       } else if (this.sel === "по алфавиту") {
-        return this.sortByProductName();
+        return {
+          value: this.sortBy = 'sort=productName:1&',
+          url: this.getAll()
+        };
       } else if (this.sel === "по количеству") {
-        return this.sortByQuantity();
+        return {
+          value: this.sortBy = 'sort=quantity:-1&',
+          url: this.getAll()
+        };
       }
-    },
-    sortByQuantity() {
-      this.tables.posts.sort((a, b) => {
-        return b.quantity - a.quantity;
-      });
-    },
-    sortByProductName() {
-      this.tables.posts.sort((a, b) => {
-        let nameA = a.productName.toLowerCase();
-        let nameB = b.productName.toLowerCase();
-        if (nameA < nameB) return -1;
-        if (nameA > nameB) return 1;
-        return 0;
-      });
     },
 
     deleteTable(post) {

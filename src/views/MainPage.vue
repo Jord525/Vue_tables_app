@@ -1,6 +1,10 @@
 <template>
   <Header />
-  <Select @input="sel = $event.target.value" />
+  <Select
+      :selected="selected"
+      :sortSelect="sortSelect"
+      :sel="sel"
+      @input="sel = $event.target.value" />
   <Tables />
   <div class="wrapperUpdateTable" v-if="isVisibleTableUpdate">
     <UpdateTable
@@ -43,12 +47,12 @@ export default {
     Paginate,
   },
   methods: {
-    ...mapActions(useTableStore, ["getAll", "updateTable", "PaginateHandler"]),
+    ...mapActions(useTableStore, ["getAll", "updateTable", "PaginateHandler",'sortSelect']),
   },
 
   computed: {
-    ...mapState(useTableStore, ["tables", "table"]),
-    ...mapWritableState(useTableStore, ["isVisibleTableUpdate", "isVisible"]),
+    ...mapState(useTableStore, ["tables", "table","selected"]),
+    ...mapWritableState(useTableStore, ["isVisibleTableUpdate", "isVisible", 'sel',]),
   },
   mounted() {
     this.getAll();
