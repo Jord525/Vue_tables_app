@@ -4,85 +4,90 @@
       <div class="popup__header">
         <button
           @click="closePopUpUpdate"
-          class="btn-close"
-          aria-label="Close"
+        class="btn-close"
+        aria-label="Close"
         ></button>
-      </div>
-      <div class="popup__contet">
-        <div class="inputTable">
-          <div class="text-primary">
-            Имя продукта
-            <input
-              type="text"
-              class="form-control"
-              id="title"
-              required
-              v-model="table.productName"
-              name="title"
-            />
-          </div>
-          <div class="text-primary">
-            Количество
-            <input
-              type="text"
-              class="form-control"
-              id="title"
-              required
-              v-model="table.quantity"
-              name="title"
-            />
-          </div>
-          <div class="text-primary">
-            Вес
-            <input
-              type="text"
-              class="form-control"
-              id="title"
-              required
-              v-model="table.weight"
-              name="title"
-            />
-          </div>
-          <div class="text-primary">
-            Цена закупки
-            <input
-              type="text"
-              class="form-control"
-              id="title"
-              required
-              v-model="table.purchasePrice"
-              name="title"
-            />
-          </div>
-          <div class="text-primary">
-            Цена продажи
-            <input
-              type="text"
-              class="form-control"
-              id="title"
-              required
-              v-model="table.sellingPrice"
-              name="title"
-            />
-          </div>
-          <div class="popup_footer">
-            <button @click="updateTable(table)" class="btn btn-success">
-              Submit
-            </button>
-          </div>
+    </div>
+    <div class="popup__contet">
+      <div class="inputTable">
+        <div class="text-primary">
+          Имя продукта
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            required
+            v-model="table.productName"
+            name="title"
+          />
         </div>
+        <div class="text-primary">
+          Количество
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            required
+            v-model="table.quantity"
+            name="title"
+          />
+        </div>
+        <div class="text-primary">
+          Вес
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            required
+            v-model="table.weight"
+            name="title"
+          />
+        </div>
+        <div class="text-primary">
+          Цена закупки
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            required
+            v-model="table.purchasePrice"
+            name="title"
+          />
+        </div>
+        <div class="text-primary">
+          Цена продажи 
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            required
+            v-model="table.sellingPrice"
+            name="title"
+          />
+        </div>
+        <div class="popup_footer">
+          <button @click="updateTable(table)" class="btn btn-success">
+          Submit
+        </button>
       </div>
     </div>
   </div>
-</template>
+</div>
+  </div >
+</template >
 <script>
+import { mapActions } from 'pinia';
+import { useTableStore } from '../stores/table';
 export default {
   data() {
     return {
       isVisibleTableUpdate: true,
     };
   },
-  props: ["table", "tables", "updateTable"],
+  props: ["table"],
+  methods: {
+    ...mapActions(useTableStore, ["updateTable"]),
+  },
 
   methods: {
     closePopUpUpdate() {
@@ -98,4 +103,4 @@ export default {
 .popup__contet {
   display: flex;
 }
-</style>
+</style> 

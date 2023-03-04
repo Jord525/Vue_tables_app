@@ -92,7 +92,7 @@ export const useTableStore = defineStore("Table", {
     },
     updateTable(id) {
       this.tables.posts.find(
-        (des) => des._id !== id._id,
+        (des) => des.productName !== id._id,
         console.log(id),
         axios
           .patch(`https://server-table-app.onrender.com/table/${id._id}`, {

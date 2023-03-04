@@ -10,18 +10,10 @@
         <td scope="col">{{ table.weight }} - гр</td>
         <td scope="col">{{ table.purchasePrice }} - руб</td>
         <td scope="col">{{ table.sellingPrice }} - руб</td>
-        <button
-          @click="deleteTable(table)"
-          type="button"
-          class="btn btn-outline-primary"
-        >
+        <button @click="deleteTable(table)" type="button" class="btn btn-outline-primary">
           Удалить
         </button>
-        <button
-          @click="updateTable(table)"
-          type="button"
-          class="btn btn-outline-warning"
-        >
+        <button @click="updateTable(table)" type="button" class="btn btn-outline-warning">
           Редактировать
         </button>
       </tr>

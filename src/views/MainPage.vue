@@ -10,10 +10,8 @@
     <UpdateTable
       v-for="table in tables.posts"
       :key="table._id"
-      :tables="tables"
       @closePopUpUpdate="isVisibleTableUpdate = false"
       :table="table"
-      :updateTable="updateTable"
     />
   </div>
   <AddTable @closePopup="isVisible = false" v-if="isVisible" />
