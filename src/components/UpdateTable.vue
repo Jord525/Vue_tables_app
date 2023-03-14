@@ -8,8 +8,8 @@
         aria-label="Close"
         ></button>
     </div>
-    <div class="popup__contet">
-      <div class="inputTable">
+    <div class="popup__contet" >
+      <div class="inputTable"  >
         <div class="text-primary">
           Имя продукта
           <input
@@ -76,24 +76,25 @@
   </div >
 </template >
 <script>
-import { mapActions } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import { useTableStore } from '../stores/table';
 export default {
   data() {
-    return {
+    return { 
       isVisibleTableUpdate: true,
+      flex: ''
     };
   },
   props: ["table"],
   methods: {
     ...mapActions(useTableStore, ["updateTable"]),
-  },
+    ...mapState(useTableStore, ['tables']),
 
-  methods: {
     closePopUpUpdate() {
       this.$emit("closePopUpUpdate");
     },
   },
+
 };
 </script>
 <style scoped>
@@ -102,5 +103,17 @@ export default {
 }
 .popup__contet {
   display: flex;
+}
+.popup_wrapper {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: grey;
 }
 </style> 

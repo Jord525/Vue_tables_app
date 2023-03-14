@@ -5,13 +5,16 @@
       :sortSelect="sortSelect"
       :sel="sel"
       @input="sel = $event.target.value" />
-  <Tables />
+   <div class="TalblesWrapper">   
+    <Tables v-if="this.tables.posts"/>
+    <Loader v-else class="loader"/>
+  </div>
   <div class="wrapperUpdateTable" v-if="isVisibleTableUpdate">
     <UpdateTable
       v-for="table in tables.posts"
       :key="table._id"
-      @closePopUpUpdate="isVisibleTableUpdate = false"
       :table="table"
+      @closePopUpUpdate="isVisibleTableUpdate = false"
     />
   </div>
   <AddTable @closePopup="isVisible = false" v-if="isVisible" />
@@ -35,6 +38,7 @@ import Select from "../components/Select.vue";
 import Tables from "../components/TableComponents/Tables.vue";
 import { useTableStore } from "../stores/table.js";
 import { mapState, mapActions, mapWritableState } from "pinia";
+import Loader from "../components/Loader.vue";
 export default {
   components: {
     Header,
@@ -43,9 +47,14 @@ export default {
     Select,
     Tables,
     Paginate,
+    Loader,
   },
   methods: {
     ...mapActions(useTableStore, ["getAll", "updateTable", "PaginateHandler",'sortSelect']),
+      correctUndef(){
+     if( this.tables.posts > 0)
+      return this.tables.posts
+    }
   },
 
   computed: {
@@ -58,3 +67,9 @@ export default {
 };
 </script>
 
+<style>
+.TalblesWrapper{
+  display: flex;
+  justify-content: center;
+}
+</style>

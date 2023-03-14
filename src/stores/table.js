@@ -82,31 +82,23 @@ export const useTableStore = defineStore("Table", {
     },
 
     deleteTable(post) {
-      this.tables.posts.find(
-        (id) => id._id !== post._id,
-        console.log(post),
-        TableDataService.delete(post._id).then(() => {
+      TableDataService.delete(post._id)
+        .then(() => {
           this.getAll();
         })
-      );
     },
     updateTable(id) {
-      this.tables.posts.find(
-        (des) => des.productName !== id._id,
-        console.log(id),
-        axios
-          .patch(`https://server-table-app.onrender.com/table/${id._id}`, {
-            productName: id.productName,
-            quantity: id.quantity,
-            weight: id.weight,
-            purchasePrice: id.purchasePrice,
-            sellingPrice: id.sellingPrice,
-          })
-          .then(() => {
-            this.isVisibleTableUpdate = true;
-            this.getAll();
-          })
-      );
+      axios
+        .patch(`https://server-table-app.onrender.com/table/${id._id}`, {
+          productName: id.productName,
+          quantity: id.quantity,
+          weight: id.weight,
+          purchasePrice: id.purchasePrice,
+          sellingPrice: id.sellingPrice,
+        })
+        .then(() => {
+          this.getAll();
+        })
     },
   },
 });
