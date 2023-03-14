@@ -8,6 +8,7 @@
 </template>
 <script>
 export default {
-  props: ["selected", "sortSelect", "sel"],
+  props: ['selected', 'sortSelect', 'sel'],
+  methods: {},
 };
 </script>

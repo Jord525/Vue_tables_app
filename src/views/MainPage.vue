@@ -1,36 +1,23 @@
 <template>
   <Header />
-  <div>
-    <Select
+  <Select
       :selected="selected"
       :sortSelect="sortSelect"
       :sel="sel"
-      @input="sel = $event.target.value"
-    />
-    <Tables
-      :updateTable="updateTable"
-      :deleteTable="deleteTable"
-      :tables="tables"
-    />
-    <div class="wrapperUpdateTable" v-if="isVisibleTableUpdate">
-      <UpdateTable
-        v-for="table in tables.posts"
-        :key="table._id"
-        :tables="tables"
-        @closePopUpUpdate="isVisibleTableUpdate = false"
-        :table="table"
-        :updateTable="updateTable"
-        :page-class="'page-item'"
-      />
-    </div>
+      @input="sel = $event.target.value" />
+   <div class="TalblesWrapper">   
+    <Tables v-if="this.tables.posts"/>
+    <Loader v-else class="loader"/>
   </div>
-  <add-table
-    @closePopup="isVisible = false"
-    v-if="isVisible"
-    :table="table"
-    :getAll="getAll"
-  >
-  </add-table>
+  <div class="wrapperUpdateTable" v-if="isVisibleTableUpdate">
+    <UpdateTable
+      v-for="table in tables.posts"
+      :key="table._id"
+      :table="table"
+      @closePopUpUpdate="isVisibleTableUpdate = false"
+    />
+  </div>
+  <AddTable @closePopup="isVisible = false" v-if="isVisible" />
   <button @click="isVisible = true" class="btn btn-outline-primary">
     Добавить
   </button>
@@ -51,6 +38,7 @@ import Select from "../components/Select.vue";
 import Tables from "../components/TableComponents/Tables.vue";
 import { useTableStore } from "../stores/table.js";
 import { mapState, mapActions, mapWritableState } from "pinia";
+import Loader from "../components/Loader.vue";
 export default {
   components: {
     Header,
@@ -59,24 +47,19 @@ export default {
     Select,
     Tables,
     Paginate,
+    Loader,
   },
   methods: {
-    ...mapActions(useTableStore, [
-      "getAll",
-      "sortSelect",
-      "deleteTable",
-      "updateTable",
-      "PaginateHandler",
-    ]),
+    ...mapActions(useTableStore, ["getAll", "updateTable", "PaginateHandler",'sortSelect']),
+      correctUndef(){
+     if( this.tables.posts > 0)
+      return this.tables.posts
+    }
   },
 
   computed: {
-    ...mapState(useTableStore, ["tables", "selected", "table"]),
-    ...mapWritableState(useTableStore, [
-      "isVisibleTableUpdate",
-      "isVisible",
-      "sel",
-    ]),
+    ...mapState(useTableStore, ["tables", "table","selected"]),
+    ...mapWritableState(useTableStore, ["isVisibleTableUpdate", "isVisible", 'sel',]),
   },
   mounted() {
     this.getAll();
@@ -84,3 +67,9 @@ export default {
 };
 </script>
 
+<style>
+.TalblesWrapper{
+  display: flex;
+  justify-content: center;
+}
+</style>

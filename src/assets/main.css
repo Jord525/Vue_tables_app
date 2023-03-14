@@ -46,18 +46,7 @@ a,
   margin: auto;
 }
 
-.popup_wrapper {
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  background: grey;
-}
+
 
 .form-select {
   width: 300px;

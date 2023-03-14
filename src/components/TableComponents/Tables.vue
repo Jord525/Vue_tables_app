@@ -10,18 +10,16 @@
         <td scope="col">{{ table.weight }} - гр</td>
         <td scope="col">{{ table.purchasePrice }} - руб</td>
         <td scope="col">{{ table.sellingPrice }} - руб</td>
-        <button
-          @click="deleteTable(table)"
-          type="button"
-          class="btn btn-outline-primary"
-        >
+        <button 
+          @click="deleteTable(table)" 
+          type="button" class="btn btn-outline-primary"
+          >
           Удалить
         </button>
-        <button
-          @click="updateTable(table)"
-          type="button"
-          class="btn btn-outline-warning"
-        >
+        <button 
+          @click="findTable()" 
+          type="button" class="btn btn-outline-warning"
+          >
           Редактировать
         </button>
       </tr>
@@ -29,11 +27,23 @@
   </table>
 </template>
 <script>
+import { mapActions, mapState, mapWritableState } from "pinia";
 import Tr from "./Tr.vue";
+import { useTableStore } from "../../stores/table";
 export default {
   components: {
     Tr,
   },
-  props: ["tables", "deleteTable", "updateTable"],
+  methods: {
+    ...mapActions(useTableStore, ["updateTable","findTable", "deleteTable"]),
+
+    findTable(){
+      this.isVisibleTableUpdate = true
+    }
+  },
+  computed: {
+    ...mapState(useTableStore, ["tables"]),
+    ...mapWritableState(useTableStore, ['isVisibleTableUpdate'])
+  },
 };
 </script>
