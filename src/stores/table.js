@@ -14,8 +14,6 @@ export const useTableStore = defineStore("Table", {
         { value: "по алфавиту" },
         { value: "по количеству" },
       ],
-
-      isVisibleTableUpdate: false,
       isVisible: false,
       table: {
         productName: "",
