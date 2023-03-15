@@ -1,75 +1,69 @@
 <template>
-  <Header />
-  <Select
-      :selected="selected"
-      :sortSelect="sortSelect"
-      :sel="sel"
-      @input="sel = $event.target.value" />
-   <div class="TalblesWrapper">   
-    <Tables v-if="this.tables.posts"/>
-    <Loader v-else class="loader"/>
-  </div>
-  <div class="wrapperUpdateTable" v-if="isVisibleTableUpdate">
-    <UpdateTable
-      v-for="table in tables.posts"
-      :key="table._id"
-      :table="table"
-      @closePopUpUpdate="isVisibleTableUpdate = false"
+    <Header />
+    <Select :selected="selected" :sortSelect="sortSelect" :sel="sel" @input="sel = $event.target.value" />
+    <div class="TalblesWrapper">
+        <Tables v-if="this.tables.posts" />
+        <Loader v-else class="loader" />
+    </div>
+    <div class="wrapperUpdateTable" v-if="isVisibleTableUpdate">
+        <UpdateTable
+            v-for="table in tables.posts"
+            :key="table._id"
+            :table="table"
+            @closePopUpUpdate="isVisibleTableUpdate = false"
+        />
+    </div>
+    <AddTable @closePopup="isVisible = false" v-if="isVisible" />
+    <button v-if="this.tables.posts" @click="isVisible = true" class="btn btn-outline-primary">Добавить</button>
+    <Paginate
+        v-if="this.tables.posts"
+        :page-count="this.tables.totalPages"
+        :click-handler="PaginateHandler"
+        :prev-text="'Prev'"
+        :next-text="'Next'"
+        :container-class="'pagination'"
     />
-  </div>
-  <AddTable @closePopup="isVisible = false" v-if="isVisible" />
-  <button @click="isVisible = true" class="btn btn-outline-primary">
-    Добавить
-  </button>
-  <Paginate
-    :page-count="this.tables.totalPages"
-    :click-handler="PaginateHandler"
-    :prev-text="'Prev'"
-    :next-text="'Next'"
-    :container-class="'pagination'"
-  />
 </template>
-<script  >
-import Paginate from "vuejs-paginate-next";
-import Header from "../components/Header.vue";
-import AddTable from "../components/AddTable.vue";
-import UpdateTable from "../components/UpdateTable.vue";
-import Select from "../components/Select.vue";
-import Tables from "../components/TableComponents/Tables.vue";
-import { useTableStore } from "../stores/table.js";
-import { mapState, mapActions, mapWritableState } from "pinia";
-import Loader from "../components/Loader.vue";
+<script>
+import Paginate from 'vuejs-paginate-next'
+import Header from '../components/Header.vue'
+import AddTable from '../components/AddTable.vue'
+import UpdateTable from '../components/UpdateTable.vue'
+import Select from '../components/Select.vue'
+import Tables from '../components/TableComponents/Tables.vue'
+import { useTableStore } from '../stores/table.js'
+import { mapState, mapActions, mapWritableState } from 'pinia'
+import Loader from '../components/Loader.vue'
 export default {
-  components: {
-    Header,
-    AddTable,
-    UpdateTable,
-    Select,
-    Tables,
-    Paginate,
-    Loader,
-  },
-  methods: {
-    ...mapActions(useTableStore, ["getAll", "updateTable", "PaginateHandler",'sortSelect']),
-      correctUndef(){
-     if( this.tables.posts > 0)
-      return this.tables.posts
-    }
-  },
+    components: {
+        Header,
+        AddTable,
+        UpdateTable,
+        Select,
+        Tables,
+        Paginate,
+        Loader,
+    },
+    methods: {
+        ...mapActions(useTableStore, ['getAll', 'updateTable', 'PaginateHandler', 'sortSelect']),
+        correctUndef() {
+            if (this.tables.posts > 0) return this.tables.posts
+        },
+    },
 
-  computed: {
-    ...mapState(useTableStore, ["tables", "table","selected"]),
-    ...mapWritableState(useTableStore, ["isVisibleTableUpdate", "isVisible", 'sel',]),
-  },
-  mounted() {
-    this.getAll();
-  },
-};
+    computed: {
+        ...mapState(useTableStore, ['tables', 'table', 'selected']),
+        ...mapWritableState(useTableStore, ['isVisibleTableUpdate', 'isVisible', 'sel']),
+    },
+    mounted() {
+        this.getAll()
+    },
+}
 </script>
 
 <style>
-.TalblesWrapper{
-  display: flex;
-  justify-content: center;
+.TalblesWrapper {
+    display: flex;
+    justify-content: center;
 }
 </style>
