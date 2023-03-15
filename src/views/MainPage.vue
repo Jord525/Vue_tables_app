@@ -5,14 +5,6 @@
         <Tables v-if="this.tables.posts" />
         <Loader v-else class="loader" />
     </div>
-    <div class="wrapperUpdateTable" v-if="isVisibleTableUpdate">
-        <UpdateTable
-            v-for="table in tables.posts"
-            :key="table._id"
-            :table="table"
-            @closePopUpUpdate="isVisibleTableUpdate = false"
-        />
-    </div>
     <AddTable @closePopup="isVisible = false" v-if="isVisible" />
     <button v-if="this.tables.posts" @click="isVisible = true" class="btn btn-outline-primary">Добавить</button>
     <Paginate

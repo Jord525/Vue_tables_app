@@ -14,8 +14,6 @@ export const useTableStore = defineStore("Table", {
         { value: "по алфавиту" },
         { value: "по количеству" },
       ],
-
-      isVisibleTableUpdate: false,
       isVisible: false,
       table: {
         productName: "",
@@ -88,10 +86,6 @@ export const useTableStore = defineStore("Table", {
         })
     },
     updateTable(id) {
-      // this.tables = this.tables.find(des => {
-      //   des._id !== id._id
-      //   console.log(id._id)
-      // })
       axios
         .patch(`https://server-table-app.onrender.com/table/${id._id}`, {
           productName: id.productName,
