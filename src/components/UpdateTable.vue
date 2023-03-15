@@ -62,7 +62,7 @@
                         />
                     </div>
                     <div class="popup_footer">
-                        <button @click="updateTable(table)" class="btn btn-success">Submit</button>
+                        <button @click="updateTable(table)" class="btn btn-success">Сохранить</button>
                     </div>
                 </div>
             </div>
@@ -76,7 +76,6 @@ export default {
     data() {
         return {
             isVisibleTableUpdate: true,
-            flex: '',
         }
     },
     props: ['table'],
@@ -108,5 +107,6 @@ export default {
     top: 0;
     bottom: 0;
     background: grey;
+    z-index: 4;
 }
 </style>
