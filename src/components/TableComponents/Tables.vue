@@ -5,33 +5,68 @@
         </thead>
         <tbody class="thead-light" v-for="table in tables.posts" :key="table._id">
             <tr class="tr">
-                <td>
+                <td scope="row">
                     <span v-if="!table.edit">{{ table.productName }}</span>
-                    <input type="text" class="form-control" v-model="table.productName" v-if="table.edit" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-model="table.productName"
+                        v-if="table.edit"
+                    />
                 </td>
-                <td>
+                <td scope="col">
                     <span v-if="!table.edit">{{ table.quantity }}</span>
-                    <input type="text" class="form-control" v-model="table.quantity" v-if="table.edit" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-model="table.quantity"
+                        v-if="table.edit"
+                    />
                 </td>
-                <td>
+                <td scope="col">
                     <span v-if="!table.edit">{{ table.purchasePrice }}</span>
-                    <input type="text" class="form-control" v-model="table.purchasePrice" v-if="table.edit" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-model="table.purchasePrice"
+                        v-if="table.edit"
+                    />
                 </td>
-                <td>
+                <td scope="col">
                     <span v-if="!table.edit">{{ table.purchasePrice }}</span>
-                    <input type="text" class="form-control" v-model="table.purchasePrice" v-if="table.edit" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-model="table.purchasePrice"
+                        v-if="table.edit"
+                    />
                 </td>
-                <td>
+                <td scope="col">
                     <span v-if="!table.edit">{{ table.sellingPrice }}</span>
-                    <input type="text" class="form-control" v-model="table.sellingPrice" v-if="table.edit" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-model="table.sellingPrice"
+                        v-if="table.edit"
+                    />
                 </td>
-                <td>
-                    <button @click="deleteTable(table)" type="button" class="btn btn-outline-primary">Удалить</button>
-                    <button v-if="!table.edit" class="btn btn-outline-warning" @:click="editPerson(table)">edit</button>
-                    <button v-if="table.edit" class="btn btn-outline-warning" @:click="updateTable(table)">
-                        Сохранить
-                    </button>
-                </td>
+                <button @click="deleteTable(table)" type="button" class="btn btn-outline-primary">
+                    Удалить
+                </button>
+                <button
+                    v-if="!table.edit"
+                    class="btn btn-outline-warning"
+                    @:click="editPerson(table)"
+                >
+                    edit
+                </button>
+                <button
+                    v-if="table.edit"
+                    class="btn btn-outline-warning"
+                    @:click="updateTable(table)"
+                >
+                    Сохранить
+                </button>
             </tr>
         </tbody>
     </table>

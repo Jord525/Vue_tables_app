@@ -1,12 +1,19 @@
 <template>
     <Header />
-    <Select :selected="selected" :sortSelect="sortSelect" :sel="sel" @input="sel = $event.target.value" />
+    <Select
+        :selected="selected"
+        :sortSelect="sortSelect"
+        :sel="sel"
+        @input="sel = $event.target.value"
+    />
     <div class="TalblesWrapper">
         <Tables v-if="this.tables.posts" />
         <Loader v-else class="loader" />
     </div>
     <AddTable @closePopup="isVisible = false" v-if="isVisible" />
-    <button v-if="this.tables.posts" @click="isVisible = true" class="btn btn-outline-primary">Добавить</button>
+    <button v-if="this.tables.posts" @click="isVisible = true" class="btn btn-outline-primary">
+        Добавить
+    </button>
     <Paginate
         v-if="this.tables.posts"
         :page-count="this.tables.totalPages"
@@ -38,9 +45,6 @@ export default {
     },
     methods: {
         ...mapActions(useTableStore, ['getAll', 'updateTable', 'PaginateHandler', 'sortSelect']),
-        correctUndef() {
-            if (this.tables.posts > 0) return this.tables.posts
-        },
     },
 
     computed: {

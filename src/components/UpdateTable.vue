@@ -62,7 +62,9 @@
                         />
                     </div>
                     <div class="popup_footer">
-                        <button @click="updateTable(table)" class="btn btn-success">Сохранить</button>
+                        <button @click="updateTable(table)" class="btn btn-success">
+                            Сохранить
+                        </button>
                     </div>
                 </div>
             </div>
