@@ -7,7 +7,7 @@
         @input="sel = $event.target.value"
     />
     <div class="TalblesWrapper">
-        <Tables v-if="this.tables.posts" />
+        <Tables v-if="this.tables.tables" />
         <Loader v-else class="loader" />
     </div>
     <AddTable @closePopup="isVisible = false" v-if="isVisible" />
@@ -15,7 +15,7 @@
         Добавить
     </button>
     <Paginate
-        v-if="this.tables.posts"
+        v-if="this.tables.tables"
         :page-count="this.tables.totalPages"
         :click-handler="PaginateHandler"
         :prev-text="'Prev'"

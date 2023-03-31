@@ -3,7 +3,7 @@
         <thead>
             <Tr />
         </thead>
-        <tbody class="thead-light" v-for="table in tables.posts" :key="table._id">
+        <tbody class="thead-light" v-for="table in tables.tables" :key="table.id">
             <tr class="tr">
                 <td scope="row">
                     <span v-if="!table.edit">{{ table.productName }}</span>
