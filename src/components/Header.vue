@@ -14,47 +14,27 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="flex">
-                <!-- <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <router-link class="nav-link active" aria-current="page" to="/"
-                                >Home</router-link
-                            >
-                        </li>
-                    </ul>
-                </div> -->
                 <div class="navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav" v-for="user in users">
-                        <li class="nav-item">{{ user.id }}</li>
-                    </ul>
+                    <span v-if="store.token && route.path !== '/user'">{{ store.user?.name }}</span>
                 </div>
-            </div>
+           </div>
         </div>
-    </nav>
+  </nav>
 </template>
-<script>
-import { mapActions, mapState } from 'pinia'
-import { useTableStore } from '../stores/table'
-import axios from 'axios'
-export default {
-    data() {
-        return {
-            users: [],
-        }
-    },
+<script setup>
+import {  onMounted } from 'vue'
+import { useUserStore } from '../stores/user'
+import { useRoute } from 'vue-router'
 
-    methods: {
-        ...mapState(useTableStore, ['tables']),
+const store = useUserStore()
+const route = useRoute()
 
-        async getUser() {
-            const response = await axios.get('http://localhost:3000/users')
-            this.users = response.data
-        },
-    },
-    mounted() {
-        this.getUser()
-    },
+onMounted(()=>{
+if(store.token !== null){
+  store.getMe()
 }
+})
+
 </script>
 <style>
 .flex {

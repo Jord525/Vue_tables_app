@@ -24,11 +24,11 @@
                     />
                 </td>
                 <td scope="col">
-                    <span v-if="!table.edit">{{ table.purchasePrice }}</span>
+                    <span v-if="!table.edit">{{ table.weight }}</span>
                     <input
                         type="text"
                         class="form-control"
-                        v-model="table.purchasePrice"
+                        v-model="table.weight"
                         v-if="table.edit"
                     />
                 </td>
@@ -50,7 +50,7 @@
                         v-if="table.edit"
                     />
                 </td>
-                <button @click="deleteTable(table)" type="button" class="btn btn-outline-primary">
+                <button  @:click='deleteTable(table)' type="button" class="btn btn-outline-primary">
                     Удалить
                 </button>
                 <button

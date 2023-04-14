@@ -1,5 +1,4 @@
 <template>
-    <Header />
     <Select
         :selected="selected"
         :sortSelect="sortSelect"
@@ -11,7 +10,11 @@
         <Loader v-else class="loader" />
     </div>
     <AddTable @closePopup="isVisible = false" v-if="isVisible" />
-    <button v-if="this.tables.posts" @click="isVisible = true" class="btn btn-outline-primary">
+    <button
+        v-if="this.tables.tables && this.token"
+        @click="isVisible = true"
+        class="btn btn-outline-primary"
+    >
         Добавить
     </button>
     <Paginate
@@ -31,6 +34,7 @@ import UpdateTable from '../components/UpdateTable.vue'
 import Select from '../components/Select.vue'
 import Tables from '../components/TableComponents/Tables.vue'
 import { useTableStore } from '../stores/table.js'
+import { useUserStore } from '../stores/user.js'
 import { mapState, mapActions, mapWritableState } from 'pinia'
 import Loader from '../components/Loader.vue'
 export default {
@@ -49,6 +53,7 @@ export default {
 
     computed: {
         ...mapState(useTableStore, ['tables', 'table', 'selected']),
+        ...mapState(useUserStore, ['token']),
         ...mapWritableState(useTableStore, ['isVisibleTableUpdate', 'isVisible', 'sel']),
     },
     mounted() {
