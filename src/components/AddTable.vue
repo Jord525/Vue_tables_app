@@ -73,24 +73,25 @@
     </div>
 </template>
 <script>
-import { mapActions, mapState } from 'pinia'
-import { useTableStore } from '../stores/table.js'
+import { mapActions, mapState } from 'pinia';
+import { useTableStore } from '../stores/table.js';
 export default {
     methods: {
         closePopUp() {
-            this.$emit('closePopup')
+            this.$emit('closePopup');
         },
         ...mapActions(useTableStore, ['getAll', 'saveTable']),
     },
     computed: {
         ...mapState(useTableStore, ['table', 'successMessage']),
     },
-}
+};
 </script>
 
 <style scoped>
 .popup_wrapper {
     display: flex;
+    z-index: 4;
     justify-content: center;
     align-items: center;
     position: absolute;

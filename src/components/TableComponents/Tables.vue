@@ -7,6 +7,7 @@
             <tr class="tr">
                 <td scope="row">
                     <span v-if="!table.edit">{{ table.productName }}</span>
+                    {{ table.edit }}
                     <input
                         type="text"
                         class="form-control"
@@ -50,7 +51,11 @@
                         v-if="table.edit"
                     />
                 </td>
-                <button  @:click='deleteTable(table)' type="button" class="btn btn-outline-primary">
+                <button
+                    @:click="deleteTable(table)"
+                    type="button"
+                    class="btn btn-outline-primary"
+                >
                     Удалить
                 </button>
                 <button
@@ -72,14 +77,14 @@
     </table>
 </template>
 <script>
-import { mapActions, mapState } from 'pinia'
-import Tr from './Tr.vue'
-import { useTableStore } from '../../stores/table'
+import { mapActions, mapState } from 'pinia';
+import Tr from './Tr.vue';
+import { useTableStore } from '../../stores/table';
 export default {
     data() {
         return {
             edit: false,
-        }
+        };
     },
     components: {
         Tr,
@@ -88,14 +93,19 @@ export default {
         ...mapActions(useTableStore, ['updateTable', 'deleteTable']),
 
         editPerson: function (table) {
-            table.edit = true
+            table.edit = true;
         },
         cancelPerson: function (table) {
-            table.edit = false
+            table.edit = false;
         },
     },
     computed: {
         ...mapState(useTableStore, ['tables']),
     },
-}
+};
 </script>
+<style>
+.table {
+    margin-bottom: 0rem !important;
+}
+</style>

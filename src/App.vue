@@ -11,7 +11,6 @@ export default {
 
 <template>
 <Header />
-
   <div class="wrapper">
     <RouterLink to="/"></RouterLink>
 </div>
